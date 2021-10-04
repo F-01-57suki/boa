@@ -101,9 +101,9 @@ $sql = "SELECT COUNT(*) FROM `post`";
 $stmt = $pdo -> prepare($sql);
 $stmt -> execute();
 $count = $stmt -> fetchColumn();//レコード総数
-$perPage = 10; //ページあたりのデータ件数
+$perPage = 5; //ページあたりのデータ件数
 $totalPage = ceil($count / $perPage); // 最大ページ数（ceilで端数切上）
-//総数÷ページ10件
+//総数÷ページ5件
 if(isset($_GET['page'])):
 $page = (int) $_GET['page'];//現在ページ（GETでページ数を投げて受ける
 else:
@@ -113,7 +113,7 @@ endif;
 $prev = max($page - 1,1);//戻るで投げるGET数
 $next = min($page + 1,$totalPage);//進むで投げるGET数
 
-$offset = 10 * ($page - 1);
+$offset = 5 * ($page - 1);
 
 ?>
 <!DOCTYPE html>
@@ -163,11 +163,11 @@ $offset = 10 * ($page - 1);
         <?php
         //一覧の取得
         if($offset === 0):
-          $sql = 'SELECT * FROM `post` ORDER BY `created_at` DESC LIMIT 10';
+          $sql = 'SELECT * FROM `post` ORDER BY `created_at` DESC LIMIT 5';
           $stmt=$pdo->prepare($sql);
           $stmt->execute();
         else:
-          $sql = 'SELECT * FROM `post` ORDER BY `created_at` DESC LIMIT :offset,10';
+          $sql = 'SELECT * FROM `post` ORDER BY `created_at` DESC LIMIT :offset,5';
           $stmt=$pdo->prepare($sql);
           $stmt -> bindParam(':offset',$offset);
           $stmt -> execute();

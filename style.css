@@ -31,7 +31,7 @@ body{
   justify-content:center;
   background-image: url(img/bg.png);
   background-repeat: no-repeat;
-  background-position: right bottom;
+  background-position: left bottom;
   background-attachment: fixed;
 }
 
